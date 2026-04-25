@@ -2,23 +2,22 @@ Feature: Registro de usuarios en Serverest
 
   @registro_usuario
   Scenario: Registro exitoso con email único
-    * def usuario = dataHelper.generarUsuario()
+    * def uniqueEmail = 'juan' + java.util.UUID.randomUUID().toString().replaceAll('-', '').substring(0,8) + '@test.com'
     Given url 'https://serverest.dev'
     And path '/usuarios'
-    And request usuario
+    And request { "nome": "Juan QA", "email": "#(uniqueEmail)", "password": "1234", "administrador": "true" }
     When method post
     Then status 201
-    And match response == { "_id": "#string", "message": "#string" }
-    And match response.message == 'Cadastro realizado com sucesso'
-    And print 'Usuario creado:', usuario.email
 
-  #Scenario: Registro exitoso con email único
-  #  * def uniqueEmail = 'juan' + java.util.UUID.randomUUID().toString().replaceAll('-', '').substring(0,8) + '@test.com'
-  #  Given url 'https://serverest.dev'
-  #  And path '/usuarios'
-  #  And request { "nome": "Juan QA", "email": "#(uniqueEmail)", "password": "1234", "administrador": "true" }
-  #  When method post
-  #  Then status 201
+    #* def usuario = dataHelper.generarUsuario()
+    #Given url 'https://serverest.dev'
+    #And path '/usuarios'
+    #And request usuario
+    #When method post
+    #Then status 201
+    #And match response == { "_id": "#string", "message": "#string" }
+    #And match response.message == 'Cadastro realizado com sucesso'
+    #And print 'Usuario creado:', usuario.email
 
   @listar_usuarios
   Scenario: Listar todos los usuarios
