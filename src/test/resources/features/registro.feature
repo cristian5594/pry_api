@@ -9,16 +9,7 @@ Feature: Registro de usuarios en Serverest
     When method post
     Then status 201
 
-    #* def usuario = dataHelper.generarUsuario()
-    #Given url 'https://serverest.dev'
-    #And path '/usuarios'
-    #And request usuario
-    #When method post
-    #Then status 201
-    #And match response == { "_id": "#string", "message": "#string" }
-    #And match response.message == 'Cadastro realizado com sucesso'
-    #And print 'Usuario creado:', usuario.email
-
+    
   @listar_usuarios
   Scenario: Listar todos los usuarios
     Given url 'https://serverest.dev'
